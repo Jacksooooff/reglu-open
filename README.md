@@ -91,28 +91,7 @@ TORCHRUN_NPROC_PER_NODE=4 ./scripts/tofu_finetune.sh
 
 ## Reproducing the paper
 
-All YAMLs in `configs/` ship the paper-reported settings.
-
-| Setting                  | TOFU (forget10)            | WMDP (bio)              |
-|--------------------------|----------------------------|-------------------------|
-| LoRA `r` / `alpha`       | 32 / 64                    | 32 / 64                 |
-| `batch × grad_accum`     | 4 × 8                      | 2 × 16                  |
-| `num_epochs`             | 5                          | 5                       |
-| `max_steps`              | auto (formula below)       | 100                     |
-| `learning_rate`          | 1e-4                       | 1e-5                    |
-| `max_length`             | 500                        | 1024                    |
-| RILA samples / split     | 256                        | 256                     |
-| RILA β                   | 0.7                        | 0.5                     |
-| ROL λ / rank             | 0.5 / 128                  | 0.5 / 128               |
-| ROL targets / side       | `all_lora` / `B`           | `all_lora` / `B`        |
-
-TOFU training steps follow the standard formula
-
-```
-max_steps = num_epochs × |train| / (batch_size × grad_accum × world_size)
-```
-
-e.g. for TOFU forget10: `5 × 400 / (4 × 8 × 1) = 62` steps.
+All hyperparameters used for the experiments reported in the paper are shipped as-is in `configs/`. See the YAML files for exact values.
 
 ## Configuration surface (public v1)
 
