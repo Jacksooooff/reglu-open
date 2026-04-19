@@ -1,4 +1,4 @@
-"""RegLU open-source toolkit."""
+"""ReGLU open-source toolkit."""
 
 __all__ = ["__version__"]
 

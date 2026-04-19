@@ -1,6 +1,6 @@
-# RegLU Method
+# ReGLU Method
 
-RegLU v1 keeps a single public method name, `RegLU`.
+ReGLU v1 keeps a single public method name, `reglu`.
 
 The public config surface is:
 

@@ -24,7 +24,7 @@ env/
 .DS_Store
 Thumbs.db
 
-# RegLU runtime artifacts
+# ReGLU runtime artifacts
 outputs/
 wandb/
 lightning_logs/

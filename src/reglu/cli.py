@@ -19,7 +19,7 @@ def _default_single_visible_gpu(config: RunConfig) -> None:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="reglu", description="RegLU open-source CLI")
+    parser = argparse.ArgumentParser(prog="reglu", description="ReGLU open-source CLI")
     subparsers = parser.add_subparsers(dest="command", required=True)
     for command in PUBLIC_COMMANDS:
         aliases: list[str] = []

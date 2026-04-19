@@ -523,7 +523,7 @@ class RegLUUnlearnTrainer(Trainer):
                 retain_inputs,
             )
         else:
-            raise ValueError(f"Unsupported RegLU variant '{self.loss_type}'.")
+            raise ValueError(f"Unsupported ReGLU variant '{self.loss_type}'.")
         loss = forget_loss + retain_loss
         rol_penalty = None
         if self.rol_lambda > 0:

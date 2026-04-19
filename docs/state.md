@@ -5,7 +5,7 @@
 ## 已完成
 
 - 公开 CLI 统一为 `reglu finetune / reglu forget / reglu eval`
-- 公开命名统一为论文命名：`RegLU / RILA / ROL`
+- 公开命名统一为论文命名：`ReGLU / RILA / ROL`
 - WMDP 评测统一走 `lm_eval`，并写出 `LMEval_EVAL.json` / `LMEval_SUMMARY.json`
 - forget trainer 的 `eval_only` / `eval_while_train` 控制流已经接到公开 `reglu eval` 路径
 - TOFU 评测会写出 legacy 风格的 `eval_log_aggregated.json` 和 `aggregate_stat.csv`

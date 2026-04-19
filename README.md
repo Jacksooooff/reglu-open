@@ -62,7 +62,7 @@ WMDP evaluation uses the `lm-eval` harness, which is declared as a dependency in
 # 1. Finetune on TOFU `full` split (produces checkpoint-last used by forget)
 ./scripts/tofu_finetune.sh
 
-# 2. Unlearn on forget10 with RegLU (RILA init + ROL regularizer + IHL loss)
+# 2. Unlearn on forget10 with ReGLU (RILA init + ROL regularizer + IHL loss)
 ./scripts/tofu_forget.sh
 
 # 3. Official TOFU evaluation (MU / FQ + retain / author / world metrics)
