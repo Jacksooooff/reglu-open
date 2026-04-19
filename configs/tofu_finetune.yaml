@@ -1,0 +1,50 @@
+task: tofu
+model_family: phi-1.5
+
+data:
+  path: locuslab/TOFU
+  split: full
+  question_key: question
+  answer_key: answer
+  max_length: 500
+
+model:
+  model_path: null
+  tokenizer_path: null
+  local_files_only: false
+  trust_remote_code: true
+  torch_dtype: bfloat16
+
+lora:
+  enabled: false
+  targets: all
+  r: 0
+  alpha: 32
+  dropout: 0.05
+
+method:
+  name: reglu
+  variant: ihl
+  init_strategy: default
+  rol_lambda: 0.0
+  rol_rank: 128
+  rol_targets: all_lora
+
+training:
+  batch_size: 4
+  gradient_accumulation_steps: 8
+  num_epochs: 5
+  max_steps: null
+  learning_rate: 2.0e-5
+  weight_decay: 0.01
+  warmup_steps: 0
+  logging_steps: 0
+  save_steps: null
+  save_total_limit: null
+  seed: 42
+  deepspeed_config: configs/ds_config.json
+
+runtime:
+  output_dir: ./outputs/tofu-finetune-phi
+  device: auto
+  dry_run: false

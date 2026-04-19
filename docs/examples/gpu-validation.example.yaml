@@ -1,0 +1,48 @@
+version: 1
+
+defaults:
+  atol: 5.0e-4
+  rtol: 1.0e-3
+
+checks:
+  - name: tofu_finetune_layout
+    kind: run_dir
+    baseline_dir: /abs/path/to/legacy/tofu_finetune_run
+    candidate_dir: /abs/path/to/reglu-open/outputs/tofu-finetune
+    required_files_baseline:
+      - config.yaml
+    required_files_candidate:
+      - config.yaml
+      - metrics.summary.json
+      - checkpoints/checkpoint-last
+
+  - name: tofu_forget_layout
+    kind: run_dir
+    baseline_dir: /abs/path/to/legacy/tofu_forget_run
+    candidate_dir: /abs/path/to/reglu-open/outputs/tofu-forget
+    required_files_baseline:
+      - config.yaml
+    required_files_candidate:
+      - config.yaml
+      - metrics.summary.json
+      - checkpoints/checkpoint-last
+      - efficiency_log.csv
+
+  - name: tofu_eval
+    kind: tofu_eval
+    baseline_dir: /abs/path/to/legacy/tofu_eval_dir
+    candidate_dir: /abs/path/to/reglu-open/outputs/tofu-eval
+
+  - name: wmdp_eval
+    kind: wmdp_eval
+    baseline_dir: /abs/path/to/legacy/wmdp_eval_dir
+    candidate_dir: /abs/path/to/reglu-open/outputs/wmdp-eval
+
+  - name: optional_forget_loss_trace
+    kind: csv_trace
+    baseline: /abs/path/to/legacy/forget_loss_trace.csv
+    candidate: /abs/path/to/reglu-open/outputs/tofu-forget/efficiency_log.csv
+    step_key: step
+    value_key: forget_loss
+    atol: 1.0e-3
+    rtol: 5.0e-3

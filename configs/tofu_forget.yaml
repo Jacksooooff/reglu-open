@@ -1,0 +1,64 @@
+task: tofu
+model_family: phi-1.5
+
+data:
+  path: locuslab/TOFU
+  split: forget10
+  question_key: question
+  answer_key: answer
+  base_answer_key: paraphrased_answer
+  perturbed_answer_key: perturbed_answer
+  max_length: 500
+
+model:
+  model_path: ./outputs/tofu-finetune-phi/checkpoints/checkpoint-last
+  tokenizer_path: ./outputs/tofu-finetune-phi/checkpoints/checkpoint-last
+  local_files_only: false
+  trust_remote_code: true
+  torch_dtype: bfloat16
+
+lora:
+  enabled: true
+  targets: all
+  r: 32
+  alpha: 64
+  dropout: 0.0
+
+method:
+  name: reglu
+  variant: ihl
+  init_strategy: rila
+  rol_lambda: 0.5
+  rol_rank: 128
+  rol_targets: all_lora
+  rila_cache_path: null
+  require_rila_cache: false
+  rila_samples_per_split: 256
+  rila_beta: 0.7
+  rila_cov_shrink: 0.0
+
+training:
+  batch_size: 4
+  gradient_accumulation_steps: 8
+  num_epochs: 5
+  max_steps: null
+  learning_rate: 1.0e-4
+  weight_decay: 0.01
+  warmup_steps: 0
+  logging_steps: 10
+  save_steps: null
+  save_total_limit: 1
+  seed: 42
+  deepspeed_config: configs/ds_config.json
+
+evaluation:
+  batch_size: 30
+  split_symbol: null
+  max_length: 200
+  max_new_tokens: null
+  overwrite: true
+
+runtime:
+  output_dir: ./outputs/tofu-forget-phi
+  device: auto
+  dry_run: false

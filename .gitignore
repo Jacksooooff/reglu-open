@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Envs / IDEs
+.venv/
+venv/
+env/
+.env
+.envrc
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# RegLU runtime artifacts
+outputs/
+wandb/
+lightning_logs/
+runs/
+checkpoints/
+*.pt
+*.bin
+*.safetensors
+
+# Local data caches
+data/
+.cache/
+.hf_cache/
+
+# Experiment logs
+*.log
+*.out
+*.err
+metrics.jsonl
+metrics.summary.json
+
+# Jupyter
+.ipynb_checkpoints/

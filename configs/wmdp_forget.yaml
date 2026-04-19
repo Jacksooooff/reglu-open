@@ -1,0 +1,58 @@
+task: wmdp
+model_family: zephyr-7b-beta
+
+data:
+  path: ./data/wmdp-corpora
+  split: bio
+  max_length: 1024
+
+model:
+  model_path: /data/ml/efficient-llm-unlearning/TOFU/models/ze
+  tokenizer_path: /data/ml/efficient-llm-unlearning/TOFU/models/ze
+  local_files_only: false
+  trust_remote_code: true
+  torch_dtype: bfloat16
+
+lora:
+  enabled: true
+  targets: all
+  r: 32
+  alpha: 64
+  dropout: 0.05
+
+method:
+  name: reglu
+  variant: gd
+  init_strategy: rila
+  rol_lambda: 0.5
+  rol_rank: 128
+  rol_targets: all_lora
+  rila_cache_path: null
+  require_rila_cache: false
+  rila_samples_per_split: 256
+  rila_beta: 0.5
+  rila_cov_shrink: 0.0
+
+training:
+  batch_size: 2
+  gradient_accumulation_steps: 16
+  num_epochs: 5
+  max_steps: 100
+  learning_rate: 1.0e-5
+  weight_decay: 0.01
+  warmup_steps: 0
+  logging_steps: 10
+  save_steps: null
+  save_total_limit: 1
+  seed: 42
+  deepspeed_config: configs/ds_config.json
+
+evaluation:
+  batch_size: 4
+  max_length: 256
+  overwrite: true
+
+runtime:
+  output_dir: ./outputs/wmdp-forget
+  device: auto
+  dry_run: false

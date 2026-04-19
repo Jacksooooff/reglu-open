@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reglu-open"
+version = "0.1.0"
+description = "Official ReGLU: Representation-Guided Low-rank Unlearning for LLMs (Findings of ACL 2026)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+  { name = "Zeguan Xiao" },
+  { name = "Lang Mo" },
+  { name = "Yun Chen" },
+  { name = "Lei Yang" },
+  { name = "Jiehui Zhao" },
+  { name = "Lili Yang" },
+  { name = "Guanhua Chen" },
+]
+dependencies = [
+  "datasets>=2.18.0",
+  "evaluate>=0.4.0",
+  "lm-eval",
+  "numpy>=1.24",
+  "omegaconf>=2.3.0",
+  "peft>=0.12.0",
+  "PyYAML>=6.0",
+  "rouge-score>=0.1.2",
+  "scipy>=1.10.0",
+  "torch>=2.1.0",
+  "torchmetrics>=1.4.0",
+  "transformers>=4.44.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0.0",
+]
+train = [
+  "deepspeed",
+]
+
+[project.scripts]
+reglu = "reglu.cli:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
