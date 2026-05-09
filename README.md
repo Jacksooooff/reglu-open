@@ -123,13 +123,6 @@ Each `reglu finetune | forget | eval` run writes under `runtime.output_dir`:
 TOFU eval additionally writes `eval_log.json`, `eval_real_author_wo_options.json`, `eval_real_world_wo_options.json`, `eval_log_forget.json`, `eval_log_aggregated.json`, `aggregate_stat.csv`.
 WMDP eval additionally writes `LMEval_EVAL.json`, `LMEval_SUMMARY.json`.
 
-## Tests
-
-```bash
-pytest -q
-```
-
-Tests that require `torch` will be skipped automatically if PyTorch is not installed.
 
 ## Citation
 
