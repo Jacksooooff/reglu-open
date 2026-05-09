@@ -8,7 +8,7 @@
 
 ReGLU is a lightweight, LoRA-based LLM unlearning framework that exploits the geometry of the representation space. It combines:
 
-- **RILA** (*Representation-guided Initialization for LoRA* — called the "representation-guided LoRA initialization" in the paper) — initialize LoRA `A`, `B` from the top eigenvectors of a `forget` / `retain` feature-covariance contrast, so optimization starts inside a subspace that is maximally forget-informative while keeping retain-direction leakage small.
+- **RILA** (*Representation-guided Initialization for LoRA*) — initialize LoRA `A`, `B` from the top eigenvectors of a `forget` / `retain` feature-covariance contrast, so optimization starts inside a subspace that is maximally forget-informative while keeping retain-direction leakage small.
 - **ROL** (*Representation-oriented Orthogonal Loss*) — a regularizer that constrains the LoRA `B` outputs to lie in the orthogonal complement of the retain-set representation subspace, minimizing interference with retain-set performance.
 - Two forget objectives: **IHL** (inverse-hinge) and **GD** (gradient difference).
 
@@ -93,7 +93,7 @@ TORCHRUN_NPROC_PER_NODE=4 ./scripts/tofu_finetune.sh
 
 All hyperparameters used for the experiments reported in the paper are shipped as-is in `configs/`. See the YAML files for exact values.
 
-## Configuration surface (public v1)
+## Configuration
 
 `method`:
 
@@ -106,8 +106,6 @@ All hyperparameters used for the experiments reported in the paper are shipped a
 `training`: batch / grad-accum / epochs / max_steps / lr / wd / warmup / save_* / seed.
 
 `evaluation`: batch size, max_length, overwrite, ds_size (TOFU).
-
-ReGLU v1 intentionally keeps the public interface small. ROL is implemented only on the LoRA `B` side — historical AB-side branches are not exposed.
 
 ## Artifacts per run
 
@@ -138,15 +136,13 @@ Tests that require `torch` will be skipped automatically if PyTorch is not insta
 If you use this code or find our work useful, please cite:
 
 ```bibtex
-@inproceedings{xiao2026reglu,
-  title     = {Representation-Guided Parameter-Efficient {LLM} Unlearning},
-  author    = {Xiao, Zeguan and Mo, Lang and Chen, Yun and Yang, Lei and Zhao, Jiehui and Yang, Lili and Chen, Guanhua},
-  booktitle = {Findings of the Association for Computational Linguistics: ACL 2026},
-  year      = {2026}
+@article{xiao2026representation,
+  title={Representation-Guided Parameter-Efficient LLM Unlearning},
+  author={Xiao, Zeguan and Mo, Lang and Chen, Yun and Yang, Lei and Zhao, Jiehui and Yang, Lili and Chen, Guanhua},
+  journal={arXiv preprint arXiv:2604.17396},
+  year={2026}
 }
 ```
-
-> The BibTeX will be updated with the final ACL Anthology key (pages / DOI) once the proceedings are published.
 
 ## License
 
